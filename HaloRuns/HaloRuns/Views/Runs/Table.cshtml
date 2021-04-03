@@ -13,35 +13,41 @@
         public map Map { get; set; }
         public int UserId { get; set; }
 *@
+
+@section title{Runs}
+
 @model HaloRuns.Models.run
-@{
-    <table style="width:100%">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(r => r.Id)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.Time)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.Url)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.Map)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.DifficultyId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(r => r.UserId)
-                </th>
-            </tr>
-        </thead>
-    </table>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(r => r.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.Map)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.DifficultyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(r => r.UserId)
+            </th>
+        </tr>
+    </thead>
+</table>
 
+@section Scripts{ 
+    <script>
 
-}
+    </script>
+} 
+
