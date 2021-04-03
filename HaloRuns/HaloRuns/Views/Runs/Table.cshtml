@@ -46,8 +46,22 @@
 </table>
 
 @section Scripts{ 
-    <script>
-
-    </script>
+	<script>
+      var table = $('table').DataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "@Url.Action("DataTablesCallback", "RunsController")",
+                "type": "POST",
+                "datatype": "json",
+            },
+            "bInfo": false,
+            "bAutoWidth": true,
+            "order": [[ 1, "asc" ]],
+			});
+	</script>
 } 
 
