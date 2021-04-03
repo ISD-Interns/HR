@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+        public int Date { get; set; }
+        [DisplayName("time")]
+        public int Time { get; set; }
+        [DisplayName("edition")]
+        public int EditionId { get; set; }
+        public int Id { get; set; }
+        [DisplayName("difficulty")]
+        public int DifficultyId { get; set; }
+        public string Url { get; set; }
+        public int MapId { get; set; }
+        public map Map { get; set; }
+        public int UserId { get; set; }
+*@
+@model HaloRuns.Models.run
+@{
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(r => r.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.Time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.Url)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.Map)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.DifficultyId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(r => r.UserId)
+                </th>
+            </tr>
+        </thead>
+    </table>
+
+
+}
