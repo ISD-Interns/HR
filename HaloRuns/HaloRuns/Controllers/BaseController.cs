@@ -22,8 +22,11 @@ namespace HaloRuns.Controllers
                 .Where(t => t.Id == 1)
                 .First();
         }
+
+        [HttpPost]
         public IActionResult DataTablesCallback() 
         {
+            return Json(0);
             //string a = Request.Form["start"];
             int start = int.Parse(Request.Query["start"]);
             int length = int.Parse(Request.Query["length"]);

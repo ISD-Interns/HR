@@ -9,7 +9,8 @@ namespace HaloRuns.Controllers
 {
     public class RunsController : BaseController
     {
-        public RunsController(HaloRunsDbContext param):   base(param)
+        public RunsController(HaloRunsDbContext param)
+            : base(param)
         {
 
         }
@@ -21,6 +22,9 @@ namespace HaloRuns.Controllers
         {
 
             return View();
+
         }
+
+
     }
 }
