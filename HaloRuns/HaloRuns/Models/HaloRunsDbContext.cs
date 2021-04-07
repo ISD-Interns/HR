@@ -29,7 +29,6 @@ namespace HaloRuns.Models
             modelBuilder.Entity<run>().ToTable("HR_runs");
             modelBuilder.Entity<user>().ToTable("HR_users");
             modelBuilder.Entity<edition>().ToTable("HR_editions");
-
             modelBuilder
                 .Entity<game>()
                 .HasMany<map>(g => g.Maps)
@@ -64,6 +63,13 @@ namespace HaloRuns.Models
                 .WithMany()
                 .HasForeignKey(r => r.EditionId)
                 .HasPrincipalKey(e => e.Id);
+
+            modelBuilder
+                .Entity<user>()
+                .HasOne<game>(u => u.Game)
+                .WithMany()
+                .HasForeignKey(u => u.FavoriteGameID)
+                .HasPrincipalKey(g => g.id);
             
         }
     }

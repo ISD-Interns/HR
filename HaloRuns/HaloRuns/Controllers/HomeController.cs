@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HaloRuns.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public HaloRunsDbContext db;
 
         //private readonly ILogger<HomeController> _logger;
 
         public HomeController(HaloRunsDbContext param)
+            : base(param)
         {
-            this.db = param;
+              
         }
 
         public IActionResult Index()
@@ -43,15 +43,15 @@ namespace HaloRuns.Controllers
                 .Where(u => u.Username == "Steve")
                 .ToList();
                 //.First()
-                //.Runs;
             //var UserRuns
+                //.Runs;
                 
             //store the game of a run in a variable 
             //
             
                 
                 
-            return View();
+            return View(this.user);
 
         }
 
@@ -64,6 +64,12 @@ namespace HaloRuns.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public ViewResult Table() 
+        {
+
+            return View();
         }
     }
 }

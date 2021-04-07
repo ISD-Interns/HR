@@ -17,6 +17,10 @@
 @section title{Runs}
 
 @model HaloRuns.Models.run
+<button type ="button" id="runbutton">
+    Click
+</button>
+
 <table style="width:100%">
     <thead>
         <tr>
@@ -46,22 +50,41 @@
 </table>
 
 @section Scripts{ 
-	<script>
-      var table = $('table').DataTable({
-            "bPaginate": true,
-            "bLengthChange": false,
-            "bFilter": true,
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "@Url.Action("DataTablesCallback", "RunsController")",
-                "type": "POST",
-                "datatype": "json",
-            },
-            "bInfo": false,
-            "bAutoWidth": true,
-            "order": [[ 1, "asc" ]],
-			});
-	</script>
+    <script>
+        /*function buttonclickcallback() {
+            console.log("button has been clicked");
+        }
+        function registerButtonEventHandler() {
+            $('#runbutton').mouseup(buttonclickcallback);
+        }
+        */
+        $(document).ready(function () {
+            var table = $('table').DataTable({
+                "searching" : false,
+                "bPaginate": true,
+                "bLengthChange": false,
+                "bFilter": true,
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "@Url.Action("DataTablesCallback", "RunsController")",
+                    "type": "POST",
+                    "datatype": "json",
+                },
+                "bInfo": false,
+                "bAutoWidth": true,
+                "order": [[1, "asc"]],
+            });
+        });
+
+        $(document).ready(function ()
+        {
+            $('#runbutton').mouseup(function () {
+                console.log("button has been clicked");
+            });
+        });
+        //$(document).ready(initalizeDataTables);
+        //$(document).ready(registerButtonEventHandler);
+    </script>
 } 
 

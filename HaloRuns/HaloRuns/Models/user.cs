@@ -13,6 +13,9 @@ namespace HaloRuns.Models
         public int TotalPoints { get; set; }
         public int Id { get; set; }
 
+        public int FavoriteGameID { get; set; }
+        public game Game { get; set; }
         public IEnumerable<run> Runs { get; set; }
+
     }
 }
