@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HaloRuns.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : BaseController<int>
     {
 
         //private readonly ILogger<HomeController> _logger;
