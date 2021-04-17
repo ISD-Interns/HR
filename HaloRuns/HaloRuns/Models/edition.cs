@@ -17,6 +17,5 @@ namespace HaloRuns.Models
 
         public int PlatfromId { get; set; }
         
-        //public platform Platform {get; set;}
     }
 }

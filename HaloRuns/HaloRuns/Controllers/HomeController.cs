@@ -71,5 +71,10 @@ namespace HaloRuns.Controllers
 
             return View();
         }
+
+        public override JsonResult dataTableParam()
+        {
+            return Json(0);
+        }
     }
 }

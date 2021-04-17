@@ -14,19 +14,19 @@ namespace HaloRuns.Controllers
         protected user user;
         public BaseController(HaloRunsDbContext param)
         {
-            
+
             this.db = param;
-            this.user = 
+            this.user =
                 db
                 .Users
                 //.Include(u => u.Game)
                 .Where(t => t.Id == 1)
                 .First();
-            
+
         }
-        
+
         [HttpPost]
-        public IActionResult DataTablesCallback() 
+        public IActionResult DataTablesCallback()
         {
             //string a = Request.Form["start"];
             int start = int.Parse(Request.Form["start"]);
@@ -48,6 +48,25 @@ namespace HaloRuns.Controllers
         }
         protected List<Func<T, object>> lambdas;
 
+        protected JsonResult generateDataTablesParam<TdataTableType>(){
+            return Json(new {
+                bPaginate = true,
+                bLengthChange = false,
+                bFilter = true,
+                processing = true,
+                serverSide = true,
+                ajax = new {
+                    url = Url.Action("PerPageIndex", typeof(T).Name),
+                    type = "POST",
+                    datatype = "json",
+                },
+                bInfo = false,
+                bAutoWidth = true,
+                order = new object[] { new object[] { 1, "asc" } },
+                columns = typeof(TdataTableType).GetProperties().Select(a => new{ data = a.Name, autowidth = true, searchable = true})
+            });
+        }
 
+        public abstract JsonResult dataTableParam();
     }
 }
