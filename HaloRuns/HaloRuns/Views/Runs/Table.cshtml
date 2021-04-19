@@ -33,12 +33,20 @@
             <th>
                 @Html.DisplayNameFor(r => r.Time)
             </th>
+            <th>
+                @Html.DisplayNameFor(r => r.Edition.Name)
+            </th>
         </tr>
     </thead>
 </table>
 
 @section Scripts{ 
     <script>
+        $(document).ready(function () {
+            $.get('@(Url.Action("dataTableParam", "Runs"))', null, function (data) {
+                var table = $('table').DataTable(data);
+            })
+        })
         /*function buttonclickcallback() {
             console.log("button has been clicked");
         }
@@ -46,6 +54,7 @@
             $('#runbutton').mouseup(buttonclickcallback);
         }
         */
+        @*
         $(document).ready(function () {
             var table = $('table').DataTable({
                 "searching" : false,
@@ -64,7 +73,7 @@
                 "order": [[1, "asc"]],
             });
         });
-
+        *@
         $(document).ready(function ()
         {
             $('#runbutton').mouseup(function () {

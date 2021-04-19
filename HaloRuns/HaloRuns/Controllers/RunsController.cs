@@ -20,6 +20,7 @@ namespace HaloRuns.Controllers
                 run => run.Time,
             }; 
         }
+        /*
         public RunsDatatableParam SetRunTable(run r) {
             var rTable = new RunsDatatableParam();
             rTable.Date = r.Date;
@@ -27,13 +28,14 @@ namespace HaloRuns.Controllers
             rTable.Id = r.Id;
             return rTable;
         }
+        */
         public IActionResult Index()
         {
-            var list = db
+            /*var list = db
                 .Runs
                 .ToList()
                 .Select(r => new RunsDatatableParam { Date = r.Date, Time = r.Time, Id = r.Id});
-            
+            */
                 
             return View();
         }
@@ -43,6 +45,7 @@ namespace HaloRuns.Controllers
             return View();
 
         }
+        /*
         public class RunsDatatableParam
         {
             public int Date { get; set; }
@@ -52,6 +55,7 @@ namespace HaloRuns.Controllers
             public int Id { get; set; }
 
         }
+        */
         public override JsonResult dataTableParam()
         {
             return generateDataTablesParam<RunsDatatableParam>();

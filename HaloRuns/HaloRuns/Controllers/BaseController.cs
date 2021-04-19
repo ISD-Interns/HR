@@ -24,6 +24,14 @@ namespace HaloRuns.Controllers
                 .First();
 
         }
+        public class RunsDatatableParam
+        {
+            public int Id { get; set; }
+            public string Date { get; set; }
+            public string Time { get; set; }
+            public string Name { get; set; }
+
+        }
 
         [HttpPost]
         public IActionResult DataTablesCallback()
@@ -34,8 +42,15 @@ namespace HaloRuns.Controllers
             var UserRuns = this
                 .db
                 .Runs
+                .Include(r => r.Edition)
                 .Where(r => r.Id >= start && r.Id <= (start + length))
-                .ToList();
+                .ToList()
+                .Select(r => new RunsDatatableParam {
+                    Date = DateTimeOffset.FromUnixTimeSeconds(r.Date).UtcDateTime.ToString("d"),
+                    Time = TimeSpan.FromSeconds(r.Time).ToString(),
+                    Id = r.Id,
+                    Name = r.Edition.Name
+                });
             int CountOfUserRuns = UserRuns.Count();
             var x = new
             {
@@ -49,6 +64,8 @@ namespace HaloRuns.Controllers
         protected List<Func<T, object>> lambdas;
 
         protected JsonResult generateDataTablesParam<TdataTableType>(){
+            var columns = typeof(TdataTableType).GetProperties();//.Select(a => new { data = a.Name, autowidth = true, searchable = true })
+
             return Json(new {
                 bPaginate = true,
                 bLengthChange = false,
@@ -56,14 +73,15 @@ namespace HaloRuns.Controllers
                 processing = true,
                 serverSide = true,
                 ajax = new {
-                    url = Url.Action("PerPageIndex", typeof(T).Name),
+                    url = Url.Action("DataTablesCallback", "runs"),
                     type = "POST",
                     datatype = "json",
                 },
                 bInfo = false,
                 bAutoWidth = true,
                 order = new object[] { new object[] { 1, "asc" } },
-                columns = typeof(TdataTableType).GetProperties().Select(a => new{ data = a.Name, autowidth = true, searchable = true})
+                columns = typeof(TdataTableType).GetProperties().Select(a => new{ data = a.Name.ToLower(), autowidth = true, searchable = true}),
+                pageLength = 3,
             });
         }
 

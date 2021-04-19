@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,13 +10,14 @@ namespace HaloRuns.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [DisplayName("Edition Name")] 
+        public string Name { get; set; } 
 
         public int GameId { get; set; }
 
         public game Game {get; set; }
 
-        public int PlatfromId { get; set; }
+        public int PlatformId { get; set; }
         
     }
 }
