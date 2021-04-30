@@ -29,12 +29,33 @@ namespace HaloRuns.Models
             modelBuilder.Entity<run>().ToTable("HR_runs");
             modelBuilder.Entity<user>().ToTable("HR_users");
             modelBuilder.Entity<edition>().ToTable("HR_editions");
+            modelBuilder.Entity<user_game>().ToTable("HR_user_game");
+
             modelBuilder
-                .Entity<game>()
-                .HasMany<map>(g => g.Maps)
-                .WithOne(m => m.Game)
-                .HasForeignKey(m => m.GameId) //must return an int 
-                .HasPrincipalKey(g => g.id);
+                .Entity<game>(gameEntity =>
+                {
+                    gameEntity.HasMany<map>(g => g.Maps)
+                    .WithOne(m => m.Game)
+                    .HasForeignKey(m => m.GameId) //must return an int 
+                    .HasPrincipalKey(g => g.id);
+
+                    gameEntity.HasMany<user_game>()
+                    .WithOne(m => m.Game)
+                    .HasForeignKey(ug => ug.GameID);
+                });
+
+             modelBuilder   
+                .Entity<user>(userEntity =>
+                {
+                    userEntity.HasMany<run>(u => u.Runs)
+                    .WithOne(r => r.User)
+                    .HasForeignKey(r => r.UserId)
+                    .HasPrincipalKey(u => u.Id);
+
+                    userEntity.HasMany<user_game>()
+                    .WithOne(u => u.User)
+                    .HasForeignKey(uu => uu.UserID);
+                });
 
             modelBuilder
                 .Entity<run>()

@@ -16,8 +16,8 @@ namespace HaloRuns.Models
         public int GameId { get; set; }
 
         public game Game {get; set; }
-
         public int PlatformId { get; set; }
+
         
     }
 }
