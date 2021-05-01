@@ -20,5 +20,8 @@ namespace HaloRuns.Models
         public int id { get; set; }
         public IEnumerable<map> Maps { get; set; }
         public IEnumerable<edition> Editions { get; set;}
+
+        public ICollection<user> Users { get; set; }
+        public List<user_game> UserGames { get; set; }
     }
 }

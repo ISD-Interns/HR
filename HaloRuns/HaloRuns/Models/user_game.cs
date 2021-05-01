@@ -7,10 +7,10 @@ namespace HaloRuns.Models
 {
     public class user_game
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
         public user User { get; set; }
 
-        public int GameID { get; set; }
+        public int GameId { get; set; }
         public game Game { get; set; }
 
     }

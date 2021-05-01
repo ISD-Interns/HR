@@ -16,6 +16,7 @@ namespace HaloRuns.Controllers
         {
 
             this.db = param;
+
             this.user =
                 db
                 .Users

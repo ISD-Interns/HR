@@ -37,6 +37,7 @@ namespace HaloRuns.Controllers
             var UserRuns = this
                 .db
                 .Users
+                .Include(u => u.Games)
                 .Include(u => u.Runs)
                 .ThenInclude(r => r.Map)
                 .ThenInclude(m => m.Game)

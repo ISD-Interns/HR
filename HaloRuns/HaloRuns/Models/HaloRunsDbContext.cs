@@ -29,7 +29,7 @@ namespace HaloRuns.Models
             modelBuilder.Entity<run>().ToTable("HR_runs");
             modelBuilder.Entity<user>().ToTable("HR_users");
             modelBuilder.Entity<edition>().ToTable("HR_editions");
-            modelBuilder.Entity<user_game>().ToTable("HR_user_game");
+            //modelBuilder.Entity<user_game>().ToTable("HR_user_game");
 
             modelBuilder
                 .Entity<game>(gameEntity =>
@@ -39,9 +39,11 @@ namespace HaloRuns.Models
                     .HasForeignKey(m => m.GameId) //must return an int 
                     .HasPrincipalKey(g => g.id);
 
+                    /*
                     gameEntity.HasMany<user_game>()
-                    .WithOne(m => m.Game)
-                    .HasForeignKey(ug => ug.GameID);
+						.WithOne(m => m.Game)
+						.HasForeignKey(ug => ug.GameID);
+                    */
                 });
 
              modelBuilder   
@@ -52,9 +54,26 @@ namespace HaloRuns.Models
                     .HasForeignKey(r => r.UserId)
                     .HasPrincipalKey(u => u.Id);
 
+                    userEntity.HasMany(u => u.Games)
+                        .WithMany(g => g.Users)
+                        .UsingEntity<user_game>(
+							pivot_table => pivot_table
+								.HasOne(pt => pt.Game)
+                                .WithMany(u => u.UserGames)
+                                .HasForeignKey(pt => pt.GameId),
+							pivot_table => pivot_table
+                                .HasOne(pt => pt.User)
+								.WithMany(u => u.UserGames)
+								.HasForeignKey(pt => pt.UserId),
+                            //null
+							pivot_table => pivot_table.ToTable("HR_user_game")
+                        );
+
+                    /*
                     userEntity.HasMany<user_game>()
-                    .WithOne(u => u.User)
-                    .HasForeignKey(uu => uu.UserID);
+						.WithOne(u => u.User)
+						.HasForeignKey(uu => uu.UserID);
+                    */
                 });
 
             modelBuilder
@@ -85,12 +104,14 @@ namespace HaloRuns.Models
                 .HasForeignKey(r => r.EditionId)
                 .HasPrincipalKey(e => e.Id);
 
+            /*
             modelBuilder
                 .Entity<user>()
                 .HasOne<game>(u => u.Game)
                 .WithMany()
                 .HasForeignKey(u => u.FavoriteGameID)
                 .HasPrincipalKey(g => g.id);
+            */
             
         }
     }
