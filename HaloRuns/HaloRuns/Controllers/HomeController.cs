@@ -42,18 +42,25 @@ namespace HaloRuns.Controllers
                 .ThenInclude(r => r.Map)
                 .ThenInclude(m => m.Game)
                 .Where(u => u.Username == "Steve")
-                .ToList();
-                //.First()
+                .First();
+            //.First()
             //var UserRuns
-                //.Runs;
-                
+            //.Runs;
+
             //store the game of a run in a variable 
             //
-            
-                
-                
-            return View(this.user);
 
+            var Game = this
+                .db
+                .Games
+                .Where(g => g.id == 3)
+                .First();
+
+            UserRuns.Games.Add(Game);
+            //UserRuns.Games.Remove(Game); //cannot pass a where clause or a lambda as a paramater. Have to pass object of the ICollection type which
+                                         // in this case is of type Game
+            db.SaveChanges();
+            return View(this.user);
         }
 
         public IActionResult Privacy()
@@ -77,5 +84,6 @@ namespace HaloRuns.Controllers
         {
             return Json(0);
         }
+
     }
 }
