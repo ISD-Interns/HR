@@ -10,10 +10,16 @@ using HaloRuns.Helpers;
 namespace HaloRuns.Controllers
 {
 	[Route("/customroute/profiles2/{user}")]
-	public class ProfileController : Controller
+	public class ProfileController : BaseController<int>
 	{
 		//[Route("{userVarParam}/main")]
 		//[Route("{" + StringConstants.DefaultModelBindKeyword + "}/main")]
+
+        public ProfileController(HaloRunsDbContext param)
+            : base(param)
+        {
+              
+        }
 		
 		[Route("main")]
 		public IActionResult Index(
@@ -28,7 +34,10 @@ namespace HaloRuns.Controllers
 		[Route("GamePreferences")]
 		public IActionResult GamePreferences(User user)
 		{
-			return View(user);
+			var viewStuff = this.db
+				.Games
+
+			return View(viewStuff);
 		}
 
 		[Route("GamePreferences/{gamePreference}/disable")]
@@ -36,5 +45,10 @@ namespace HaloRuns.Controllers
 		{
 			return Json(0);
 		}
+
+        public override JsonResult dataTableParam()
+        {
+            return Json(0);
+        }
 	}
 }
