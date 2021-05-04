@@ -11,7 +11,7 @@ namespace HaloRuns.Controllers
     public abstract class BaseController<T> : Controller
     {
         public HaloRunsDbContext db;
-        protected user user;
+        protected User user;
         public BaseController(HaloRunsDbContext param)
         {
 

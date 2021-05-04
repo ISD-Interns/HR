@@ -19,7 +19,7 @@ namespace HaloRuns.Models
         public DbSet<map> Maps { get; set; }
         public DbSet<run> Runs { get; set; }
 
-        public DbSet<user> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace HaloRuns.Models
             modelBuilder.Entity<map>().ToTable("HR_maps");
             modelBuilder.Entity<game>().ToTable("HR_games");
             modelBuilder.Entity<run>().ToTable("HR_runs");
-            modelBuilder.Entity<user>().ToTable("HR_users");
+            modelBuilder.Entity<User>().ToTable("HR_users");
             modelBuilder.Entity<edition>().ToTable("HR_editions");
             //modelBuilder.Entity<user_game>().ToTable("HR_user_game");
 
@@ -47,7 +47,7 @@ namespace HaloRuns.Models
                 });
 
              modelBuilder   
-                .Entity<user>(userEntity =>
+                .Entity<User>(userEntity =>
                 {
                     userEntity.HasMany<run>(u => u.Runs)
                     .WithOne(r => r.User)
@@ -91,7 +91,7 @@ namespace HaloRuns.Models
                 .HasPrincipalKey(g => g.id);
 
             modelBuilder
-                .Entity<user>()
+                .Entity<User>()
                 .HasMany<run>(u => u.Runs)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)

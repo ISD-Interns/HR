@@ -21,7 +21,7 @@ namespace HaloRuns.Models
         public IEnumerable<map> Maps { get; set; }
         public IEnumerable<edition> Editions { get; set;}
 
-        public ICollection<user> Users { get; set; }
+        public ICollection<User> Users { get; set; }
         public List<user_game> UserGames { get; set; }
     }
 }

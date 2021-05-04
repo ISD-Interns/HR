@@ -9,12 +9,13 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "Runs/Table?start=0&length=10&draw=25",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "commandName": "IISExpress",
+        "launchBrowser": true,
+        //"launchUrl": "Runs/Table?start=0&length=10&draw=25",
+        "launchUrl": "customroute/profiles2/steve/GamePreferences",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
     },
     "HaloRuns": {
       "commandName": "Project",

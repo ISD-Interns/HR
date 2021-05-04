@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class user
+    public class User
     {
+        [Helpers.RouteModelBindKey]
         public string Username { get; set; }
         public string Region { get; set; }
         public string Twitch { get; set; }

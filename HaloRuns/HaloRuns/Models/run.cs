@@ -20,7 +20,7 @@ namespace HaloRuns.Models
         public int MapId { get; set; }
         public map Map { get; set; }
         public int UserId { get; set; }
-        public user User { get; set; }
+        public User User { get; set; }
         public edition Edition { get; set;}
     }
 }
