@@ -17,12 +17,12 @@ namespace HaloRuns.Controllers
 		//[Route("{userVarParam}/main")]
 		//[Route("{" + StringConstants.DefaultModelBindKeyword + "}/main")]
 
-        public ProfileController(HaloRunsDbContext param)
-            : base(param)
-        {
-              
-        }
-		
+		public ProfileController(HaloRunsDbContext param)
+			: base(param)
+		{
+
+		}
+
 		[Route("main")]
 		public IActionResult Index(
 			//[ModelBinder(typeof(BaseModelBinder<User>))]
@@ -71,7 +71,7 @@ namespace HaloRuns.Controllers
 						isPreferred = currUser.Games.Contains(g),
 					})
 					.ToList();
-				
+
 			var allGames =
 				this
 				.db
@@ -81,8 +81,33 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("GamePreferences/{gamePreference}/disable")]
-		public IActionResult DisableGamePreference(User user, game gamePreference, run myRun)
+		public IActionResult DisableGamePreference(User user, game gamePreference)
 		{
+			var User = this
+				.db
+				.Users
+				.Include(g => g.Games)
+				.Where(u => u.Username == user.Username)
+				.First();
+
+				User.Games.Remove(gamePreference);
+			
+			return Json(0);
+		}
+
+		[Route("GamePreferences/{gamePreference}/enable}")]
+		
+		public IActionResult EnableGamePreference(User user, game gamePreference) 
+		{
+			var User = this
+				.db
+				.Users
+				.Include(g => g.Games)
+				.Where(u => u.Username == user.Username)
+				.First();
+
+			User.Games.Add(gamePreference);
+
 			return Json(0);
 		}
 

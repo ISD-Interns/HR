@@ -31,9 +31,10 @@
     <script>
         $(document).ready(function () {
             $('input:checkbox').click(function () {
-                const checked = $(this).attr('checked');
+                const checked = $(this).prop('checked');
                 //$.get(, null, function () {
-                alert($(this).data('routename'));
+                alert($(this).data('routename') + (checked ? " yes" : " no"));
+
                 //})
             });
         });

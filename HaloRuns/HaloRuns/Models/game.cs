@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using HaloRuns.Helpers;
 
 namespace HaloRuns.Models
 {
@@ -23,6 +24,7 @@ namespace HaloRuns.Models
 
         public ICollection<User> Users { get; set; }
         public List<user_game> UserGames { get; set; }
+        [RouteModelBindKey]
         public string RouteName { get; set; }
 
     }
