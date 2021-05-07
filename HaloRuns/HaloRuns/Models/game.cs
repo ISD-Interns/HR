@@ -23,5 +23,7 @@ namespace HaloRuns.Models
 
         public ICollection<User> Users { get; set; }
         public List<user_game> UserGames { get; set; }
+        public string RouteName { get; set; }
+
     }
 }

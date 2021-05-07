@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HaloRuns.Helpers;
 using Microsoft.EntityFrameworkCore;
+using HaloRuns.Models.ViewModels;
 
 namespace HaloRuns.Controllers
 {
@@ -64,14 +65,19 @@ namespace HaloRuns.Controllers
 			var userGamePreferences = this
 					.db
 					.Games
-					.Select(g => new
+					.Select(g => new GamePreference
 					{
-						game = g.name,
+						Game = g,
 						isPreferred = currUser.Games.Contains(g),
 					})
 					.ToList();
 				
-			return View();
+			var allGames =
+				this
+				.db
+				.Games
+				.ToList();
+			return View(userGamePreferences);
 		}
 
 		[Route("GamePreferences/{gamePreference}/disable")]

@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<HaloRuns.Models.ViewModels.GamePreference>
+@section Title { Game Preferences }
+
+<h1>
+    GAME PREFERENCES
+</h1>
+<table style="width:100%">
+    <tr>
+        <th>
+            Games
+        </th>
+        <th>
+            Preference
+        </th>
+    </tr>
+
+    @foreach (var usersGP in Model)
+    {
+        <tr>
+            <td>
+                @usersGP.Game.name
+            </td>
+            <td>
+                <input type="checkbox" @if (usersGP.isPreferred) { <text> checked</text> } data-RouteName="@usersGP.Game.RouteName">
+            </td>
+        </tr>
+    }
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('input:checkbox').click(function () {
+                const checked = $(this).attr('checked');
+                //$.get(, null, function () {
+                alert($(this).data('RouteName'));
+                //})
+            });
+        });
+    </script>
 }
