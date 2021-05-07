@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HaloRuns.Models.ViewModels.GamePreference>
+﻿@model HaloRuns.Models.ViewModels.GamePreference
 @section Title { Game Preferences }
 
 <h1>
@@ -14,17 +14,6 @@
         </th>
     </tr>
 
-    @foreach (var usersGP in Model)
-    {
-        <tr>
-            <td>
-                @usersGP.Game.name
-            </td>
-            <td>
-                <input type="checkbox" @if (usersGP.isPreferred) { <text> checked</text> } data-RouteName="@usersGP.Game.RouteName">
-            </td>
-        </tr>
-    }
 </table>
 
 @section Scripts{
@@ -32,10 +21,14 @@
         $(document).ready(function () {
             $('input:checkbox').click(function () {
                 const checked = $(this).prop('checked');
-                //$.get(, null, function () {
                 alert($(this).data('routename') + (checked ? " yes" : " no"));
+              $.get(checked
+                ? '@Url.Action("EnableGamePreference", "ProfileController", new { user = "steve", gamePreference = "h1" })'
+                : '@Url.Action("DisableGamePreference", "ProfileController", new { user = "steve", gamePreference = "h1" })',
+                null,
+                function () {
 
-                //})
+                })
             });
         });
     </script>

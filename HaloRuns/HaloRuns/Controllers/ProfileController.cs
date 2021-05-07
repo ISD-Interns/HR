@@ -62,15 +62,20 @@ namespace HaloRuns.Controllers
 
 
 			//[game,bool]
-			var userGamePreferences = this
+			var userGamePreferences = new GamePreference
+			{
+				username = user.Username,
+				Prefs =
+					this
 					.db
 					.Games
-					.Select(g => new GamePreference
+					.Select(g => new GamePreference.GamePreferenceInstance
 					{
 						Game = g,
 						isPreferred = currUser.Games.Contains(g),
 					})
-					.ToList();
+					.ToList()
+			}
 
 			var allGames =
 				this
@@ -95,7 +100,7 @@ namespace HaloRuns.Controllers
 			return Json(0);
 		}
 
-		[Route("GamePreferences/{gamePreference}/enable}")]
+		[Route("GamePreferences/{gamePreference}/enable")]
 		
 		public IActionResult EnableGamePreference(User user, game gamePreference) 
 		{
