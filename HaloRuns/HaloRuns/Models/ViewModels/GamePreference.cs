@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models.ViewModels
 {
-    public class GamePreference
-    {
-        public game Game { get; set; }
-        public bool isPreferred { get; set; }
-        
-    }
+	public class GamePreference
+	{
+		public class GamePreferenceInstance
+		{
+			public game Game { get; set; }
+			public bool isPreferred { get; set; }
+		}
+		public string username { get; set; }
+		public IEnumerable<GamePreferenceInstance> Prefs { get; set; }
+	}
 }

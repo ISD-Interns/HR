@@ -5,14 +5,39 @@
     GAME PREFERENCES
 </h1>
 <table style="width:100%">
-    <tr>
-        <th>
-            Games
-        </th>
-        <th>
-            Preference
-        </th>
-    </tr>
+	<tr>
+		<th>
+			Games
+		</th>
+		<th>
+			Preference
+		</th>
+	</tr>
+	@foreach (var usersGP in Model.Prefs)
+	{
+		<tr>
+			<td>
+				@usersGP.Game.name
+			</td>
+			<td>
+				<input
+					   type="checkbox"
+					   @if (usersGP.isPreferred) { <text>checked</text> }
+					   data-RouteName="@usersGP.Game.RouteName"
+					   @* data-disable-endpoint="@Url.Action("DisableGamePreference", "ProfileController", new { user = Model.username, gamePreference = usersGP.Game.RouteName })" *@
+
+
+					   data-disable-endpoint="@Url.RouteUrl("DisableGamePreferenceRouteName", new { user = Model.username, gamePreference = usersGP.Game.RouteName })"
+					   data-enable-endpoint="@Url.RouteUrl("EnableGamePreferenceRouteName", new { user = Model.username, gamePreference = usersGP.Game.RouteName })"
+
+					   @* data-enable-endpoint="@Url.Action("EnableGamePreference", "ProfileController", new { user = Model.username, gamePreference = usersGP.Game.RouteName })" *@
+
+				/>
+			</td>
+		</tr>
+	}
+
+
 
 </table>
 
@@ -20,15 +45,13 @@
     <script>
         $(document).ready(function () {
             $('input:checkbox').click(function () {
-                const checked = $(this).prop('checked');
-                alert($(this).data('routename') + (checked ? " yes" : " no"));
-              $.get(checked
-                ? '@Url.Action("EnableGamePreference", "ProfileController", new { user = "steve", gamePreference = "h1" })'
-                : '@Url.Action("DisableGamePreference", "ProfileController", new { user = "steve", gamePreference = "h1" })',
-                null,
-                function () {
-
-                })
+				const checked = $(this).prop('checked');
+                //$.get($(this).data(`${checked ? 'enable' : 'disable'}-endpoint`) , null, function () {
+				const endpointUrl = $(this).data((checked ? 'enable' : 'disable') + '-endpoint');
+				var outerThis = $(this)
+				$.get(endpointUrl, null, function () {
+					alert(outerThis.data('routename') + ' ' + (checked ? 'yes' : 'no'));
+				})
             });
         });
     </script>

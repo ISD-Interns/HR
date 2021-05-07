@@ -75,7 +75,9 @@ namespace HaloRuns.Controllers
 						isPreferred = currUser.Games.Contains(g),
 					})
 					.ToList()
-			}
+			};
+
+			string urlSomething = Url.RouteUrl("DisableGamePreferenceRouteName", new { });
 
 			var allGames =
 				this
@@ -85,7 +87,7 @@ namespace HaloRuns.Controllers
 			return View(userGamePreferences);
 		}
 
-		[Route("GamePreferences/{gamePreference}/disable")]
+		[Route("GamePreferences/{gamePreference}/disable", Name = "DisableGamePreferenceRouteName")]
 		public IActionResult DisableGamePreference(User user, game gamePreference)
 		{
 			var User = this
@@ -96,12 +98,12 @@ namespace HaloRuns.Controllers
 				.First();
 
 				User.Games.Remove(gamePreference);
+				this.db.SaveChanges();
 			
 			return Json(0);
 		}
 
-		[Route("GamePreferences/{gamePreference}/enable")]
-		
+		[Route("GamePreferences/{gamePreference}/enable", Name = "EnableGamePreferenceRouteName")]
 		public IActionResult EnableGamePreference(User user, game gamePreference) 
 		{
 			var User = this
@@ -111,7 +113,10 @@ namespace HaloRuns.Controllers
 				.Where(u => u.Username == user.Username)
 				.First();
 
+			//db.Attach(User)
 			User.Games.Add(gamePreference);
+			this.db.SaveChanges();
+
 
 			return Json(0);
 		}
