@@ -16,6 +16,5 @@ namespace HaloRuns.Models
         public IEnumerable<run> Runs { get; set; }
         public ICollection<game> Games { get; set; }
         public List<user_game> UserGames { get; set; }
-
     }
 }

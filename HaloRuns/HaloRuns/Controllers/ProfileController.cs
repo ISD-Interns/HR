@@ -87,7 +87,7 @@ namespace HaloRuns.Controllers
 			return View(userGamePreferences);
 		}
 
-		[Route("GamePreferences/{gamePreference}/disable", Name = "DisableGamePreferenceRouteName")]
+		[Route(template: "GamePreferences/{gamePreference}/disable", Name = "DisableGamePreferenceRouteName")]
 		public IActionResult DisableGamePreference(User user, game gamePreference)
 		{
 			var User = this
@@ -103,7 +103,7 @@ namespace HaloRuns.Controllers
 			return Json(0);
 		}
 
-		[Route("GamePreferences/{gamePreference}/enable", Name = "EnableGamePreferenceRouteName")]
+		[Route(template: "GamePreferences/{gamePreference}/enable", Name = "EnableGamePreferenceRouteName")]
 		public IActionResult EnableGamePreference(User user, game gamePreference) 
 		{
 			var User = this
