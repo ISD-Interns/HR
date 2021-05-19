@@ -29,7 +29,7 @@ namespace HaloRuns.Controllers
 			User user
 			)
 		{
-			return View();
+			return View(user);
 		}
 
 
@@ -119,6 +119,19 @@ namespace HaloRuns.Controllers
 
 
 			return Json(0);
+		}
+
+
+		[Route("NewRun/Submit")]
+		public IActionResult RunPost(User user, run newrun) {
+			user.Runs.Add(newrun);
+			this.db.SaveChanges();
+			return Json(0);
+		}
+
+		[Route("NewRun")]
+		public IActionResult RunEntry() {
+			return View();
 		}
 
         public override JsonResult dataTableParam()
