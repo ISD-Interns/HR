@@ -15,6 +15,7 @@
             <label for="gane">Choose a game:</label>
             <select name="game" id="games">
 
+                    <option value="-1">no selection</option>
                 @foreach (var game in Model.games)
                 {
                     <option value="@game">@game.name</option>
@@ -59,5 +60,13 @@
 </div>
 
 
-
-
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#games').change(function () {
+                //change code
+			})
+		})
+    </script>
+}
