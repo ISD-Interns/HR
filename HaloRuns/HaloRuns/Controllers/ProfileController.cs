@@ -136,21 +136,23 @@ namespace HaloRuns.Controllers
 					.Users
 					.Where(u => u.Username == user.Username)
 					.First();
-			var maps = this
-					.db
-					.Maps
-					.ToList();
-			var editions = this
-					.db
-					.Editions
-					.ToList();
 			var games = this
 					.db
 					.Games
 					.ToList();
 			//string username = User.Username;
-			var Form = new RunForm(user, maps, editions, games);
+			var Form = new RunForm(user, games);
 			return View(Form);
+		}
+
+		[Route("NewRun/{game}")]
+		public IActionResult RunEntryFetchEdition(game game) {
+			var Editions = this
+				.db
+				.Editions
+				.Where(g => g.GameId == game.id)
+				.ToList();
+			return View(Editions);
 		}
 
         public override JsonResult dataTableParam()

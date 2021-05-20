@@ -8,17 +8,13 @@ namespace HaloRuns.Models.ViewModels
 {
     public class RunForm
     {
-        public RunForm(user someone, List<map> maps, List<edition> editions, List<game> games) {
+        public RunForm(user someone, List<game> games) {
             this.user = someone;
-            this.maps = maps;
-            this.editions = editions;
             this.games = games;
         }
 
         [DisplayName("username")]
         public user user { get; set;}
-        public List<map> maps { get; set; }
-        public List<edition> editions { get; set; }
         public List<game> games { get; set; }
         //public string Username { get; set; }
         //public int Date { get; set; }

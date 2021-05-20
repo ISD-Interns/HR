@@ -11,62 +11,70 @@
         <h2>Create a Request</h2>
         <p>The select element is used to create a drop-down list.</p>
 
-        <form>
-            <label for="gane">Choose a game:</label>
-            <select name="game" id="games">
+        <form id="Table">
+            <label for="game">Choose a game:</label>
+            <select id="games">
 
-                    <option value="-1">no selection</option>
+                <option value="-1">no selection</option>
                 @foreach (var game in Model.games)
                 {
-                    <option value="@game">@game.name</option>
+                    <option value="@game.id" data-game="@game.RouteName">@game.name</option>
                 }
             </select>
 
-            <label for="edition">Choose an editon:</label>
-            <select name="edition" id="editions">
+            @* <label for="edition">Choose an editon:</label>
+                <select name="edition" id="editions">
 
-                @foreach (var edition in Model.editions)
-                {
-                    <option value="@edition">@edition.Name</option>
-                }
-            </select>
+                    @foreach (var edition in Model.editions)
+                    {
+                        <option value="@edition">@edition.Name</option>
+                    }
+                </select>
 
-            <label for="map">Choose a map:</label>
-            <select name="map" id="maps">
-                @foreach (var map in Model.maps)
-                {
-                    <option value=@map>@map.name</option>
+                <label for="map">Choose a map:</label>
+                <select name="map" id="maps">
+                    @foreach (var map in Model.maps)
+                    {
+                        <option value=@map>@map.name</option>
 
-                }
-            </select>
+                    }
+                </select>
+            *@
         </form>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            <div class="form-group" style="padding-left:250px;padding-top:5px">
-                <div class="col-xs-5">
-                    <input type="submit" id="submitButton" class="btn btn-primary" value="Submit" enabled />
-                </div>
+        <div class="form-group" style="padding-left:250px;padding-top:5px">
+            <div class="col-xs-5">
+                <input type="submit" id="submitButton" class="btn btn-primary" value="Submit" enabled />
+            </div>
+        </div>
+
+        <div class="form-group" style="padding-left: 225px;padding-top:10px">
+            <div class="col-xs-5">
+                <input type="button" value="Cancel Request" onclick="location.href = '@Url.Action("Index")'" />
             </div>
 
-            <div class="form-group" style="padding-left: 225px;padding-top:10px">
-                <div class="col-xs-5">
-                    <input type="button" value="Cancel Request" onclick="location.href = '@Url.Action("Index")'" />
-                </div>
-
-            </div>
+        </div>
     }
 </div>
 
 
 @section Scripts
 {
+    var clickindex = 0;
+    var el = document.querySelectorAll("#Table label")[0];
+    el.addEventListener("click", onclicked);
+
     <script>
         $(document).ready(function () {
             $('#games').change(function () {
-                //change code
-			})
-		})
+                const endpointUrl = $(this).data();
+                console.log("hello");
+                $.get(endpointUrl, null, function () {
+                })
+            })
+        })
     </script>
 }
