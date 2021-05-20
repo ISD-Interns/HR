@@ -26,7 +26,7 @@ namespace HaloRuns.Controllers
 		[Route("main")]
 		public IActionResult Index(
 			//[ModelBinder(typeof(BaseModelBinder<User>))]
-			User user
+			user user
 			)
 		{
 			return View(user);
@@ -34,7 +34,7 @@ namespace HaloRuns.Controllers
 
 
 		[Route("GamePreferences")]
-		public IActionResult GamePreferences(User user)
+		public IActionResult GamePreferences(user user)
 		{
 			// userPref 
 
@@ -88,7 +88,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("GamePreferences/{gamePreference}/disable", Name = "DisableGamePreferenceRouteName")]
-		public IActionResult DisableGamePreference(User user, game gamePreference)
+		public IActionResult DisableGamePreference(user user, game gamePreference)
 		{
 			var User = this
 				.db
@@ -104,7 +104,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("GamePreferences/{gamePreference}/enable", Name = "EnableGamePreferenceRouteName")]
-		public IActionResult EnableGamePreference(User user, game gamePreference) 
+		public IActionResult EnableGamePreference(user user, game gamePreference) 
 		{
 			var User = this
 				.db
@@ -123,15 +123,34 @@ namespace HaloRuns.Controllers
 
 
 		[Route("NewRun/Submit")]
-		public IActionResult RunPost(User user, run newrun) {
+		public IActionResult RunPost(user user, run newrun) {
 			user.Runs.Add(newrun);
 			this.db.SaveChanges();
 			return Json(0);
 		}
 
 		[Route("NewRun")]
-		public IActionResult RunEntry() {
-			return View();
+		public IActionResult RunEntry(user user) {
+			var User = this
+					.db
+					.Users
+					.Where(u => u.Username == user.Username)
+					.First();
+			var maps = this
+					.db
+					.Maps
+					.ToList();
+			var editions = this
+					.db
+					.Editions
+					.ToList();
+			var games = this
+					.db
+					.Games
+					.ToList();
+			//string username = User.Username;
+			var Form = new RunForm(user, maps, editions, games);
+			return View(Form);
 		}
 
         public override JsonResult dataTableParam()

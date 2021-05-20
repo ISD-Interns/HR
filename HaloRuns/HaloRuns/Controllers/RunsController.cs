@@ -41,7 +41,6 @@ namespace HaloRuns.Controllers
         }
         public ViewResult Table()
         {
-
             return View();
 
         }
