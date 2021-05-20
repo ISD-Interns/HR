@@ -42,15 +42,6 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-        </div>
-            <div class="form-group" style="padding-top:20px">
-                <div class="col-xs-9">
-                    <p id="accrual_msg" style="display: none"><strong>Notice:</strong> you have <span id="balanceNumber">--</span> hours of accrued <span data-code-name="true">--</span></p>
-                </div>
-            </div>
-
-            <div id="debug"></div>
 
             <div class="form-group" style="padding-left:250px;padding-top:5px">
                 <div class="col-xs-5">
@@ -63,9 +54,6 @@
                     <input type="button" value="Cancel Request" onclick="location.href = '@Url.Action("Index")'" />
                 </div>
 
-            </div>
-            <div class="form-group" style="padding-top:20px">
-                <i>The box below may be used to view the numbers of hours accrued for various types of leave.</i>
             </div>
     }
 </div>
