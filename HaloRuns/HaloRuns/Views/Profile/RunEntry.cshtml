@@ -63,16 +63,11 @@
 
 @section Scripts
 {
-    var clickindex = 0;
-    var el = document.querySelectorAll("#Table label")[0];
-    el.addEventListener("click", onclicked);
-
     <script>
         $(document).ready(function () {
             $('#games').change(function () {
-                const endpointUrl = $(this).data();
-                console.log("hello");
-                $.get(endpointUrl, null, function () {
+                const AbrevGame = $(this).children('option:selected').first().data("game");
+                $.get(AbrevGame, null, function () {
                 })
             })
         })
