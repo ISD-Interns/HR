@@ -152,6 +152,8 @@ namespace HaloRuns.Controllers
 				.Editions
 				.Where(g => g.GameId == game.id)
 				.ToList();
+
+			//string data = $"stuff{Editions.First().Name}otherstuff";
 			return Json(Editions);
 		}
 

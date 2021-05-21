@@ -64,13 +64,34 @@
     <script>
         $(document).ready(function () {
             $('#games').change(function () {
-                $(".addedEditions").remove();
+                /*
+                function filter(myarray, pred)
+                {
+                    let ret = [];
+                    for (let i = 0; i < myarray.length; ++i) {
+                        if (pred(i) == true) {
+                            ret.append(myarray[i]);
+                        }
+                    }
+				}
+                */
+                $("#editions").children().filter(function (index) {
+                    //return $(this).name != null;
+                    return index != 0;
+                }).remove();
+                /*
+                $("#editions").children().filter(function (index) {
+                    return index != 0;
+                }.each(function (item) { item.empty(); });
+                */
+
                 const AbrevGame = $(this).children('option:selected').first().data("edition-list-endpoint");
                 $.get(AbrevGame, null, function (response) {
                     console.log("hello");
                     response.forEach(function (item){
                         const editionName = item.name;
-                        $(".editions").append('<option class="addedEditions">' + editionName + "</option>");
+                        //$(".editions").append('<option>' + editionName + "</option>");
+                        $(".editions").append(`<option>${editionName}</option>`);
                     });
                 });
             });
