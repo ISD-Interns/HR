@@ -73,8 +73,8 @@
             $('#games').change(function () {
                 const AbrevGame = $(this).children('option:selected').first().data("edition-list-endpoint");
                 $.get(AbrevGame, null, function () {
-                })
-            })
-        })
+                });
+            });
+        });
     </script>
 }
