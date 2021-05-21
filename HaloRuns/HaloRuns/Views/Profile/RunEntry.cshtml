@@ -18,7 +18,12 @@
                 <option value="-1">no selection</option>
                 @foreach (var game in Model.games)
                 {
-                    <option value="@game.id" data-game="@game.RouteName">@game.name</option>
+                    <option
+                            value="@game.id"
+						    data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })"
+					>
+						@game.name
+                    </option>
                 }
             </select>
 
@@ -66,7 +71,7 @@
     <script>
         $(document).ready(function () {
             $('#games').change(function () {
-                const AbrevGame = $(this).children('option:selected').first().data("game");
+                const AbrevGame = $(this).children('option:selected').first().data("edition-list-endpoint");
                 $.get(AbrevGame, null, function () {
                 })
             })

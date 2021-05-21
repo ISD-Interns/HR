@@ -145,14 +145,14 @@ namespace HaloRuns.Controllers
 			return View(Form);
 		}
 
-		[Route("NewRun/{game}")]
+		[Route("NewRun/{game}", Name = "RunEntryFetchEditionRouteName")]
 		public IActionResult RunEntryFetchEdition(game game) {
 			var Editions = this
 				.db
 				.Editions
 				.Where(g => g.GameId == game.id)
 				.ToList();
-			return View(Editions);
+			return Json(Editions);
 		}
 
         public override JsonResult dataTableParam()
