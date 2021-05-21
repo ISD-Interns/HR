@@ -18,34 +18,27 @@
                 <option value="-1">no selection</option>
                 @foreach (var game in Model.games)
                 {
-                    <option
-                            value="@game.id"
-						    data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })"
-					>
-						@game.name
+                    <option value="@game.id"
+                            data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })">
+                        @game.name
                     </option>
                 }
             </select>
+            <label for="edition">Choose an editon:</label>
+            <select id="editions" class="editions">
+                <option class="editons" value="-1">no selection</option>
+            </select>
+                
+            <label for="map">Choose a map:</label>
+            <select id="maps" class="maps"> 
+                <option class="maps" value="-1"> no selction</option>
+            </select>
 
-            @* <label for="edition">Choose an editon:</label>
-                <select name="edition" id="editions">
-
-                    @foreach (var edition in Model.editions)
-                    {
-                        <option value="@edition">@edition.Name</option>
-                    }
-                </select>
-
-                <label for="map">Choose a map:</label>
-                <select name="map" id="maps">
-                    @foreach (var map in Model.maps)
-                    {
-                        <option value=@map>@map.name</option>
-
-                    }
-                </select>
-            *@
         </form>
+        <div class="container">
+            <div class="inner">Hello</div>
+            <div class="inner">Goodbye</div>
+        </div>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -71,8 +64,14 @@
     <script>
         $(document).ready(function () {
             $('#games').change(function () {
+                $(".addedEditions").remove();
                 const AbrevGame = $(this).children('option:selected').first().data("edition-list-endpoint");
-                $.get(AbrevGame, null, function () {
+                $.get(AbrevGame, null, function (response) {
+                    console.log("hello");
+                    response.forEach(function (item){
+                        const editionName = item.name;
+                        $(".editions").append('<option class="addedEditions">' + editionName + "</option>");
+                    });
                 });
             });
         });
