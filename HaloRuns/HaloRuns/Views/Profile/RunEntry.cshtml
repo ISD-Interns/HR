@@ -19,20 +19,25 @@
                 @foreach (var game in Model.games)
                 {
                     <option value="@game.id"
-                            data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })">
+                            data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })"
+                            data-map-list-endpoint="@Url.RouteUrl("RunEntryFetchMapRouteName", new { user = Model.user.Username, game = game.RouteName })">
                         @game.name
                     </option>
                 }
             </select>
             <label for="edition">Choose an editon:</label>
             <select id="editions" class="editions">
-                <option class="editons" value="-1">no selection</option>
+                <option value="-1">no selection</option>
             </select>
-                
+
             <label for="map">Choose a map:</label>
-            <select id="maps" class="maps"> 
-                <option class="maps" value="-1"> no selction</option>
+            <select id="maps" class="maps">
+                <option value="-1"> no selction</option>
             </select>
+
+            <label for="birthday">Date Ran:</label>
+            <input type="date" id="birthday" name="birthday">
+            <input type="submit">
 
         </form>
         <div class="container">
@@ -79,21 +84,34 @@
                     //return $(this).name != null;
                     return index != 0;
                 }).remove();
+                $("#maps").children().filter(function (index) {
+                    //return $(this).name != null;
+                    return index != 0;
+                }).remove();
                 /*
                 $("#editions").children().filter(function (index) {
                     return index != 0;
                 }.each(function (item) { item.empty(); });
                 */
 
-                const AbrevGame = $(this).children('option:selected').first().data("edition-list-endpoint");
-                $.get(AbrevGame, null, function (response) {
+                const AbrevGameEdition = $(this).children('option:selected').first().data("edition-list-endpoint");
+                $.get(AbrevGameEdition, null, function (response) {
                     console.log("hello");
-                    response.forEach(function (item){
+                    response.forEach(function (item) {
                         const editionName = item.name;
-                        //$(".editions").append('<option>' + editionName + "</option>");
                         $(".editions").append(`<option>${editionName}</option>`);
                     });
                 });
+                
+                const AbrevGameMap = $(this).children('option:selected').first().data("map-list-endpoint");
+                $.get(AbrevGameMap, null, function (response) {
+                    console.log("hello");
+                    response.forEach(function (item) {
+                        const mapName = item.name;
+                        $(".maps").append(`<option>${mapName}</option>`);
+                    });
+                });
+
             });
         });
     </script>

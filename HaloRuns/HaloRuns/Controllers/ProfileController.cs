@@ -145,7 +145,7 @@ namespace HaloRuns.Controllers
 			return View(Form);
 		}
 
-		[Route("NewRun/{game}", Name = "RunEntryFetchEditionRouteName")]
+		[Route("NewRun/{game}/editions", Name = "RunEntryFetchEditionRouteName")]
 		public IActionResult RunEntryFetchEdition(game game) {
 			var Editions = this
 				.db
@@ -153,11 +153,22 @@ namespace HaloRuns.Controllers
 				.Where(g => g.GameId == game.id)
 				.ToList();
 
-			//string data = $"stuff{Editions.First().Name}otherstuff";
 			return Json(Editions);
 		}
 
-        public override JsonResult dataTableParam()
+		[Route("NewRun/{game}/maps", Name = "RunEntryFetchMapRouteName")]
+		public IActionResult RunEntryFetchMap(game game)
+		{
+			var Maps = this
+				.db
+				.Maps
+				.Where(m => m.GameId == game.id)
+				.ToList();
+
+			return Json(Maps);
+		} 
+
+		public override JsonResult dataTableParam()
         {
             return Json(0);
         }
