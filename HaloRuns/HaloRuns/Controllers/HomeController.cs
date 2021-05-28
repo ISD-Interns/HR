@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HaloRuns.Models;
 using Microsoft.EntityFrameworkCore;
+using HaloRuns.Models.ViewModels;
 
 namespace HaloRuns.Controllers
 {
@@ -67,6 +68,16 @@ namespace HaloRuns.Controllers
         {
             return View();
         }
+
+        public IActionResult DropdownTest()
+		{
+            var x = this
+                .db
+                .Maps
+                .ToList();
+
+            return View(new DropdownTestViewModel { maps = x});
+		}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

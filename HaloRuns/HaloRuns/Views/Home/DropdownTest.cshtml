@@ -1,0 +1,11 @@
+﻿@model HaloRuns.Models.ViewModels.DropdownTestViewModel
+
+@section Title
+{
+	fake title
+}
+
+@* @Html.DropDownListFor(m => m.OneMap, new SelectList(Model.maps)) *@
+
+@Html.DropDownListFor(m => m.OneMap, new SelectList(Model.maps.Select(m => m.name)))
+
