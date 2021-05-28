@@ -11,9 +11,9 @@
         <h2>Create a Request</h2>
         <p>The select element is used to create a drop-down list.</p>
 
-        <form id="Table">
-            <label for="game">Choose a game:</label>
-            <select id="games">
+        <form id="Table" asp-controller="Profile" asp-action="RunPost">
+            <label for="games">Choose a game:</label>
+            <select id="games" class="games">
 
                 <option value="-1">no selection</option>
                 @foreach (var game in Model.games)
@@ -35,32 +35,22 @@
                 <option value="-1"> no selction</option>
             </select>
 
-            <label for="birthday">Date Ran:</label>
-            <input type="date" id="birthday" name="birthday">
-            <input type="submit">
-
+            <label for="difficulties">Choose a difficulty:</label>
+            <select id="difficulties" class="difficulties">
+                <option value="-1"> no selction</option>
+                @foreach (var diff in Model.difficulties)
+                {
+                    <option value="@diff.Id">
+                        @diff.Name
+                    </option>
+                }
+            </select>
+            <button type="submit" form="nameform" value="Submit" id="Submit"
+                    data-submit-endpoint="@Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
+                Submit
+            </button>
         </form>
-        <div class="container">
-            <div class="inner">Hello</div>
-            <div class="inner">Goodbye</div>
-        </div>
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-        <div class="form-group" style="padding-left:250px;padding-top:5px">
-            <div class="col-xs-5">
-                <input type="submit" id="submitButton" class="btn btn-primary" value="Submit" enabled />
-            </div>
-        </div>
-
-        <div class="form-group" style="padding-left: 225px;padding-top:10px">
-            <div class="col-xs-5">
-                <input type="button" value="Cancel Request" onclick="location.href = '@Url.Action("Index")'" />
-            </div>
-
-        </div>
-    }
+        }
 </div>
 
 
@@ -68,6 +58,7 @@
 {
     <script>
         $(document).ready(function () {
+
             $('#games').change(function () {
                 /*
                 function filter(myarray, pred)
@@ -88,6 +79,7 @@
                     //return $(this).name != null;
                     return index != 0;
                 }).remove();
+
                 /*
                 $("#editions").children().filter(function (index) {
                     return index != 0;
@@ -99,7 +91,8 @@
                     console.log("hello");
                     response.forEach(function (item) {
                         const editionName = item.name;
-                        $(".editions").append(`<option>${editionName}</option>`);
+                        const editionId = item.id;
+                        $(".editions").append(`<option value=${editionId}> ${editionName}</option>`);
                     });
                 });
                 
@@ -108,10 +101,45 @@
                     console.log("hello");
                     response.forEach(function (item) {
                         const mapName = item.name;
-                        $(".maps").append(`<option>${mapName}</option>`);
+                        const mapId = item.id;
+                        console.log( mapId);
+                        $(".maps").append(`<option value =${mapId}> ${mapName}</option>`);
                     });
                 });
 
+            });
+
+            $('#Submit').click(function () {
+                console.log("clicked");
+                var mapId = $(".maps :selected").attr('value');
+                var editionId = $(".editions :selected").attr('value');
+                var difficultyId = $(".difficulties :selected").attr('value');
+                var gameId = $(".games :selected").attr('value');
+                const submitAbrev = $(this).data("submit-endpoint");
+                var Ids = { map: mapId, edition: editionId, difficulty: difficultyId, game: gameId };
+                var RunIds = JSON.stringify(Ids);
+                var theId = "123";
+                var theFilename = "somefile";
+                var theDescription = "somedescription";
+                var stringArray = new Array();
+                stringArray[0] = mapId;
+                stringArray[1] = editionId;
+                stringArray[2] = difficultyId;
+                stringArray[3] = gameId;
+                var postData = { values: stringArray };
+                $.ajax({
+                    type: "POST",
+                    url: submitAbrev,
+                    data: postData,
+                    success: function (data) {
+                        alert(data.Result);
+                    },
+                    dataType: "json",
+                    traditional: true
+                });
+                //$.post(submitAbrev, postData, function (response) {
+                //    console.log(response);
+                //});
             });
         });
     </script>

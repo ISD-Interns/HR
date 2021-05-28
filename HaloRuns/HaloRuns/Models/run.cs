@@ -16,6 +16,7 @@ namespace HaloRuns.Models
         public int Id { get; set; }
         [DisplayName("difficulty")]
         public int DifficultyId { get; set; }
+        public difficulty Difficulty { get; set; }
         public string Url { get; set; }
         public int MapId { get; set; }
         public map Map { get; set; }

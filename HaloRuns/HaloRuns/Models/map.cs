@@ -10,8 +10,6 @@ namespace HaloRuns.Models
     {
         [DisplayName("name")]
         public string name { get; set; }
-        [DisplayName("difficulty")]
-        public string difficulty { get; set; }
         public int id { get; set; }
         public int GameId { get; set; }
         public game Game { get; set; }

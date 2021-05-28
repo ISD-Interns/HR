@@ -22,6 +22,7 @@ namespace HaloRuns.Models
         public DbSet<edition> Editions {get; set;}
 
         public DbSet<user> Users { get; set; }
+        public DbSet<difficulty> Difficulty { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +32,7 @@ namespace HaloRuns.Models
             modelBuilder.Entity<run>().ToTable("HR_runs");
             modelBuilder.Entity<user>().ToTable("HR_users");
             modelBuilder.Entity<edition>().ToTable("HR_editions");
+            modelBuilder.Entity<difficulty>().ToTable("HR_difficulty");
             //modelBuilder.Entity<user_game>().ToTable("HR_user_game");
 
             modelBuilder
@@ -40,6 +42,7 @@ namespace HaloRuns.Models
                     .WithOne(m => m.Game)
                     .HasForeignKey(m => m.GameId) //must return an int 
                     .HasPrincipalKey(g => g.id);
+
 
                     /*
                     gameEntity.HasMany<user_game>()
@@ -114,7 +117,12 @@ namespace HaloRuns.Models
                 .HasForeignKey(u => u.FavoriteGameID)
                 .HasPrincipalKey(g => g.id);
             */
-            
+            modelBuilder
+                .Entity<run>()
+                .HasOne<difficulty>(r => r.Difficulty)
+                .WithMany()
+                .HasForeignKey(r => r.DifficultyId)
+                .HasPrincipalKey(d => d.Id);
         }
     }
 }

@@ -18,6 +18,5 @@ namespace HaloRuns.Models
         public game Game {get; set; }
         public int PlatformId { get; set; }
 
-        
     }
 }

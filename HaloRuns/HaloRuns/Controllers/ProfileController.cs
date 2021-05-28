@@ -122,12 +122,20 @@ namespace HaloRuns.Controllers
 		}
 
 
-		[Route("NewRun/Submit")]
+		[Route("NewRun/Submit/{mapId}", Name = "RunSubmit")]
+		[HttpPost]
+		public JsonResult RunPost(user User, [FromForm] List<String> values) {
+			return Json(values);
+		}
+
+		/*
+		 * [Route("NewRun/Submit")]
 		public IActionResult RunPost(user user, run newrun) {
 			user.Runs.Add(newrun);
 			this.db.SaveChanges();
 			return Json(0);
 		}
+		*/
 
 		[Route("NewRun")]
 		public IActionResult RunEntry(user user) {
@@ -140,8 +148,14 @@ namespace HaloRuns.Controllers
 					.db
 					.Games
 					.ToList();
+
+			var difficulties = this
+					.db
+					.Difficulty
+					.Where(d => d.Id <= 4)
+					.ToList();
 			//string username = User.Username;
-			var Form = new RunForm(user, games);
+			var Form = new RunForm(user, games, difficulties);
 			return View(Form);
 		}
 
@@ -166,7 +180,20 @@ namespace HaloRuns.Controllers
 				.ToList();
 
 			return Json(Maps);
-		} 
+		}
+
+		[Route("NewRun/GetRunInstance")]
+		public run GetRunInstance(user User, difficulty Difficulty, map Map, int Time, edition Edition) {
+			int Date = 0;
+			var a = new run();
+			a.User = User;
+            a.Date = Date;
+			a.Difficulty = Difficulty;
+			a.Map = Map;
+			a.Time = Time;
+			a.Edition = Edition;
+			return a;
+		}
 
 		public override JsonResult dataTableParam()
         {
