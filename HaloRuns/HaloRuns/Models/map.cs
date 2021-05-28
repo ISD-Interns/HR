@@ -15,5 +15,10 @@ namespace HaloRuns.Models
         public game Game { get; set; }
         public IEnumerable<run> Runs { get; set; }
 
-    }
+		public override string ToString()
+		{
+            return this.name;
+		}
+
+	}
 }
