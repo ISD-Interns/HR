@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class map
+    public class map// : Object
     {
         [DisplayName("name")]
         public string name { get; set; }
@@ -15,10 +15,11 @@ namespace HaloRuns.Models
         public game Game { get; set; }
         public IEnumerable<run> Runs { get; set; }
 
+        /*
 		public override string ToString()
 		{
             return this.name;
 		}
-
+        */
 	}
 }
