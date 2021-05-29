@@ -16,13 +16,13 @@ namespace HaloRuns.Models
 
         [DisplayName("name")]
         public string name { get; set; }
+        [RouteModelBindKey]
         public int id { get; set; }
         public IEnumerable<Map> Maps { get; set; }
         public IEnumerable<Edition> Editions { get; set;}
 
         public ICollection<User> Users { get; set; }
         public List<user_game> UserGames { get; set; }
-        [RouteModelBindKey]
         public string RouteName { get; set; }
 
     }

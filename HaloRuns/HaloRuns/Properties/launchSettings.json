@@ -13,6 +13,9 @@
       "launchBrowser": true,
       //"launchUrl": "Runs/Table?start=0&length=10&draw=25",
       "launchUrl": "customroute/profiles2/steve/NewRun",
+      //"launchUrl": "Home/DropdownTest",
+
+
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

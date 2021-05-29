@@ -7,5 +7,7 @@
 
 @* @Html.DropDownListFor(m => m.OneMap, new SelectList(Model.maps)) *@
 
-@Html.DropDownListFor(m => m.OneMap, new SelectList(Model.maps.Select(m => m.name)))
+@* @Html.DropDownListFor(m => m.OneMap, new SelectList(Model.maps.Select(m => m.name))) *@
+
+@Html.DropDownListFor(m => m.OneMap, new SelectList(new string[] { "choose an edition" }), new { id = "testetetetetetetet" })
 

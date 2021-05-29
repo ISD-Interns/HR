@@ -134,10 +134,13 @@ namespace HaloRuns.Controllers
 					.Users
 					.Where(u => u.Username == user.Username)
 					.First();
-			var games = this
-					.db
-					.Games
-					.ToList();
+			var games = 
+				new List<Game> { new Game { name = "&&&&&&&&&&&&" } }.Concat(
+					this
+						.db
+						.Games
+						.ToList()
+					).ToList();
 
 			var difficulties = this
 					.db
@@ -150,7 +153,8 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("NewRun/{game}/editions", Name = "RunEntryFetchEditionRouteName")]
-		public IActionResult RunEntryFetchEdition(Game game) {
+		public IActionResult RunEntryFetchEdition(Game game)
+		{
 			var Editions = this
 				.db
 				.Editions

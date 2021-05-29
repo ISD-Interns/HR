@@ -51,9 +51,14 @@
             </button>
         </form>
         <p>Game:</p>
-        @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => m.name)), new { id = "1" })
+        @* @Html.DropDownListFor(m => m.games, new SelectList(new List<SelectListItem> { new SelectListItem{ Text = "no selection", Value = "-1" } }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
+
+		@* @Html.DropDownListFor(m => m.games, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
+		@* @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => new SelectListItem { Text = m.name, Value = m.id.ToString() }).ToList()), new { id = "1" }) *@
+		@Html.DropDownListFor(m => m.games, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), "name"), new { id = "1" })
+
         <p>Difficulty:</p>
-        @Html.DropDownListFor(m => m.difficulties, new SelectList(Model.difficulties.Select(m => m.Name)), new { id = "2" })
+        @Html.DropDownListFor(m => m.run.DifficultyId, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.difficulties.Select(m => m.Name))), new { id = "2" })
         <p>Edition:</p>
         @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "3" })
         <p>Map:</p>
@@ -67,6 +72,8 @@
 {
     <script>
         $(document).ready(function () {
+            const kEditionListEndpointFormatString = "@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = "REPLACE_STR" })";
+            const kMapListEndpointFormatString = "@Url.RouteUrl("RunEntryFetchMapRouteName", new { user = Model.user.Username, game = "REPLACE_STR" })";
 
             $('#1').change(function () {
                 /*
@@ -95,7 +102,9 @@
                 }.each(function (item) { item.empty(); });
                 */
 
-                const AbrevGameEdition = $(this).children('option:selected').first().data("edition-list-endpoint");
+                //const AbrevGameEdition = $(this).children('option:selected').first().data("edition-list-endpoint");
+				//const AbrevGameEdition = decodeURIComponent(tkEditionListEndpointFormatString).format()
+                const AbrevGameEdition = kEditionListEndpointFormatString.replace('REPLACE_STR', $(this).children('option:selected').first().val());
                 $.get(AbrevGameEdition, null, function (response) {
                     console.log("hello");
                     response.forEach(function (item) {
@@ -105,7 +114,9 @@
                     });
                 });
                 
-                const AbrevGameMap = $(this).children('option:selected').first().data("map-list-endpoint");
+                //const AbrevGameMap = $(this).children('option:selected').first().data("map-list-endpoint");
+                const AbrevGameMap = 
+                const AbrevGameMap = kMapListEndpointFormatString.replace('REPLACE_STR', $(this).children('option:selected').first().val());
                 $.get(AbrevGameMap, null, function (response) {
                     console.log("hello");
                     response.forEach(function (item) {
