@@ -123,8 +123,8 @@ namespace HaloRuns.Controllers
 
 		[Route("NewRun/Submit", Name = "RunSubmit")]
 		[HttpPost]
-		public JsonResult RunPost(User User, [FromForm] RunForm RunForm) {
-			return Json(RunForm);
+		public JsonResult RunPost(User User, [FromForm] RunForm rf) {
+			return Json(rf);
 		}
 
 		[Route("NewRun")]

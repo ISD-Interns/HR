@@ -23,5 +23,6 @@ namespace HaloRuns.Models
         public int UserId { get; set; }
         public User User { get; set; }
         public Edition Edition { get; set;}
+        public int GameId { get; set; }
     }
 }
