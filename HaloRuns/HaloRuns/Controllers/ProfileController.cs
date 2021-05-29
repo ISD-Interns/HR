@@ -135,18 +135,21 @@ namespace HaloRuns.Controllers
 					.Where(u => u.Username == user.Username)
 					.First();
 			var games = 
-				new List<Game> { new Game { name = "&&&&&&&&&&&&" } }.Concat(
+				new List<Game> { new Game { name = "no selection" } }.Concat(
 					this
 						.db
 						.Games
 						.ToList()
 					).ToList();
 
-			var difficulties = this
+			var difficulties =
+				new List<Difficulty> { new Difficulty { Name = "no selection" } }.Concat(
+				this
 					.db
 					.Difficulty
 					.Where(d => d.Id <= 4)
-					.ToList();
+					.ToList()
+					).ToList();
 			//string username = User.Username;
 			var Form = new RunForm(user, games, difficulties);
 			return View(Form);
