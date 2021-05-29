@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HaloRuns.Controllers
 {
-    public class RunsController : BaseController<run>
+    public class RunsController : BaseController<Run>
     {
         public RunsController(HaloRunsDbContext param)
             : base(param)
         {
             //user.name, Map.name, Time
 
-            lambdas = new List<Func<run, object>> { 
+            lambdas = new List<Func<Run, object>> { 
                 run => run.User.Username,
                 run => run.Map.name,
                 run => run.Time,

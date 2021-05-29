@@ -9,7 +9,7 @@ namespace HaloRuns.Models.ViewModels
 	{
 		public class GamePreferenceInstance
 		{
-			public game Game { get; set; }
+			public Game Game { get; set; }
 			public bool isPreferred { get; set; }
 		}
 		public string username { get; set; }

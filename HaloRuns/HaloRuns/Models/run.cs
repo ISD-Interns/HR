@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class run
+    public class Run
     {
         public int Date { get; set; }
         [DisplayName("time")]
@@ -16,12 +16,12 @@ namespace HaloRuns.Models
         public int Id { get; set; }
         [DisplayName("difficulty")]
         public int DifficultyId { get; set; }
-        public difficulty Difficulty { get; set; }
+        public Difficulty Difficulty { get; set; }
         public string Url { get; set; }
         public int MapId { get; set; }
-        public map Map { get; set; }
+        public Map Map { get; set; }
         public int UserId { get; set; }
-        public user User { get; set; }
-        public edition Edition { get; set;}
+        public User User { get; set; }
+        public Edition Edition { get; set;}
     }
 }

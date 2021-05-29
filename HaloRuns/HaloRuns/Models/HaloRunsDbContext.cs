@@ -15,30 +15,30 @@ namespace HaloRuns.Models
         public HaloRunsDbContext(DbContextOptions<HaloRunsDbContext> options)
             : base(options) { }
 
-        public DbSet<game> Games { get; set; }
-        public DbSet<map> Maps { get; set; }
-        public DbSet<run> Runs { get; set; }
+        public DbSet<Game> Games { get; set; }
+        public DbSet<Map> Maps { get; set; }
+        public DbSet<Run> Runs { get; set; }
 
-        public DbSet<edition> Editions {get; set;}
+        public DbSet<Edition> Editions {get; set;}
 
-        public DbSet<user> Users { get; set; }
-        public DbSet<difficulty> Difficulty { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Difficulty> Difficulty { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("dbo");
-            modelBuilder.Entity<map>().ToTable("HR_maps");
-            modelBuilder.Entity<game>().ToTable("HR_games");
-            modelBuilder.Entity<run>().ToTable("HR_runs");
-            modelBuilder.Entity<user>().ToTable("HR_users");
-            modelBuilder.Entity<edition>().ToTable("HR_editions");
-            modelBuilder.Entity<difficulty>().ToTable("HR_difficulty");
+            modelBuilder.Entity<Map>().ToTable("HR_maps");
+            modelBuilder.Entity<Game>().ToTable("HR_games");
+            modelBuilder.Entity<Run>().ToTable("HR_runs");
+            modelBuilder.Entity<User>().ToTable("HR_users");
+            modelBuilder.Entity<Edition>().ToTable("HR_editions");
+            modelBuilder.Entity<Difficulty>().ToTable("HR_difficulty");
             //modelBuilder.Entity<user_game>().ToTable("HR_user_game");
 
             modelBuilder
-                .Entity<game>(gameEntity =>
+                .Entity<Game>(gameEntity =>
                 {
-                    gameEntity.HasMany<map>(g => g.Maps)
+                    gameEntity.HasMany<Map>(g => g.Maps)
                     .WithOne(m => m.Game)
                     .HasForeignKey(m => m.GameId) //must return an int 
                     .HasPrincipalKey(g => g.id);
@@ -52,9 +52,9 @@ namespace HaloRuns.Models
                 });
 
              modelBuilder   
-                .Entity<user>(userEntity =>
+                .Entity<User>(userEntity =>
                 {
-                    userEntity.HasMany<run>(u => u.Runs)
+                    userEntity.HasMany<Run>(u => u.Runs)
                     .WithOne(r => r.User)
                     .HasForeignKey(r => r.UserId)
                     .HasPrincipalKey(u => u.Id);
@@ -82,29 +82,29 @@ namespace HaloRuns.Models
                 });
 
             modelBuilder
-                .Entity<run>()
-                .HasOne<map>(r => r.Map)
+                .Entity<Run>()
+                .HasOne<Map>(r => r.Map)
                 .WithMany(m => m.Runs)
                 .HasForeignKey(r => r.MapId)
                 .HasPrincipalKey(m => m.id);
 
             modelBuilder
-                .Entity<edition>()
-                .HasOne<game>(e => e.Game)
+                .Entity<Edition>()
+                .HasOne<Game>(e => e.Game)
                 .WithMany(g => g.Editions)
                 .HasForeignKey(e => e.GameId)
                 .HasPrincipalKey(g => g.id);
 
             modelBuilder
-                .Entity<user>()
-                .HasMany<run>(u => u.Runs)
+                .Entity<User>()
+                .HasMany<Run>(u => u.Runs)
                 .WithOne(r => r.User)
                 .HasForeignKey(r => r.UserId)
                 .HasPrincipalKey(u => u.Id);
 
             modelBuilder
-                .Entity<run>()
-                .HasOne<edition>(r => r.Edition)
+                .Entity<Run>()
+                .HasOne<Edition>(r => r.Edition)
                 .WithMany()
                 .HasForeignKey(r => r.EditionId)
                 .HasPrincipalKey(e => e.Id);
@@ -118,8 +118,8 @@ namespace HaloRuns.Models
                 .HasPrincipalKey(g => g.id);
             */
             modelBuilder
-                .Entity<run>()
-                .HasOne<difficulty>(r => r.Difficulty)
+                .Entity<Run>()
+                .HasOne<Difficulty>(r => r.Difficulty)
                 .WithMany()
                 .HasForeignKey(r => r.DifficultyId)
                 .HasPrincipalKey(d => d.Id);

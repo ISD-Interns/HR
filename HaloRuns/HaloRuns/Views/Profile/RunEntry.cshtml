@@ -50,7 +50,16 @@
                 Submit
             </button>
         </form>
-        }
+        <p>Game:</p>
+        @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => m.name)), new { id = "1" })
+        <p>Difficulty:</p>
+        @Html.DropDownListFor(m => m.difficulties, new SelectList(Model.difficulties.Select(m => m.Name)), new { id = "2" })
+        <p>Edition:</p>
+        @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "3" })
+        <p>Map:</p>
+        @Html.DropDownListFor(m => m.run.MapId, new SelectList(new string[] { "no selection" }), new { id = "4" })
+
+    }
 </div>
 
 
@@ -59,7 +68,7 @@
     <script>
         $(document).ready(function () {
 
-            $('#games').change(function () {
+            $('#1').change(function () {
                 /*
                 function filter(myarray, pred)
                 {
@@ -71,11 +80,11 @@
                     }
 				}
                 */
-                $("#editions").children().filter(function (index) {
+                $("#3").children().filter(function (index) {
                     //return $(this).name != null;
                     return index != 0;
                 }).remove();
-                $("#maps").children().filter(function (index) {
+                $("#4").children().filter(function (index) {
                     //return $(this).name != null;
                     return index != 0;
                 }).remove();
@@ -118,28 +127,9 @@
                 const submitAbrev = $(this).data("submit-endpoint");
                 var Ids = { map: mapId, edition: editionId, difficulty: difficultyId, game: gameId };
                 var RunIds = JSON.stringify(Ids);
-                var theId = "123";
-                var theFilename = "somefile";
-                var theDescription = "somedescription";
-                var stringArray = new Array();
-                stringArray[0] = mapId;
-                stringArray[1] = editionId;
-                stringArray[2] = difficultyId;
-                stringArray[3] = gameId;
-                var postData = { values: stringArray };
-                $.ajax({
-                    type: "POST",
-                    url: submitAbrev,
-                    data: postData,
-                    success: function (data) {
-                        alert(data.Result);
-                    },
-                    dataType: "json",
-                    traditional: true
+                $.post(submitAbrev, RunIds, function (response) {
+                    console.log(response);
                 });
-                //$.post(submitAbrev, postData, function (response) {
-                //    console.log(response);
-                //});
             });
         });
     </script>

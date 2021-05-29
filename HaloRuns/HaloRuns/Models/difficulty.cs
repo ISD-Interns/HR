@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class difficulty
+    public class Difficulty
     {
         public int Id {get; set;}
 

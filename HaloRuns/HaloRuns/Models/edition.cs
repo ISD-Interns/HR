@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class edition
+    public class Edition
     {
+        [Helpers.RouteModelBindKey]
         public int Id { get; set; }
 
         [DisplayName("Edition Name")] 
@@ -15,7 +16,7 @@ namespace HaloRuns.Models
 
         public int GameId { get; set; }
 
-        public game Game {get; set; }
+        public Game Game {get; set; }
         public int PlatformId { get; set; }
 
     }

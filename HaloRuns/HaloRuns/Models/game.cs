@@ -7,7 +7,7 @@ using HaloRuns.Helpers;
 
 namespace HaloRuns.Models
 {
-    public class game
+    public class Game
     {
         //name , difficulty, id
         //        [DisplayName("Pay Code")]
@@ -17,10 +17,10 @@ namespace HaloRuns.Models
         [DisplayName("name")]
         public string name { get; set; }
         public int id { get; set; }
-        public IEnumerable<map> Maps { get; set; }
-        public IEnumerable<edition> Editions { get; set;}
+        public IEnumerable<Map> Maps { get; set; }
+        public IEnumerable<Edition> Editions { get; set;}
 
-        public ICollection<user> Users { get; set; }
+        public ICollection<User> Users { get; set; }
         public List<user_game> UserGames { get; set; }
         [RouteModelBindKey]
         public string RouteName { get; set; }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class user
+    public class User
     {
         [Helpers.RouteModelBindKey]
         public string Username { get; set; }    
@@ -13,8 +13,8 @@ namespace HaloRuns.Models
         public string Twitch { get; set; }
         public int TotalPoints { get; set; }
         public int Id { get; set; }
-        public ICollection<run> Runs { get; set; }
-        public ICollection<game> Games { get; set; }
+        public ICollection<Run> Runs { get; set; }
+        public ICollection<Game> Games { get; set; }
         public List<user_game> UserGames { get; set; }
 
     }

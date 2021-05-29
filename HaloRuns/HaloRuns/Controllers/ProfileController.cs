@@ -26,7 +26,7 @@ namespace HaloRuns.Controllers
 		[Route("main")]
 		public IActionResult Index(
 			//[ModelBinder(typeof(BaseModelBinder<User>))]
-			user user
+			User user
 			)
 		{
 			return View(user);
@@ -34,7 +34,7 @@ namespace HaloRuns.Controllers
 
 
 		[Route("GamePreferences")]
-		public IActionResult GamePreferences(user user)
+		public IActionResult GamePreferences(User user)
 		{
 			// userPref 
 
@@ -88,7 +88,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("GamePreferences/{gamePreference}/disable", Name = "DisableGamePreferenceRouteName")]
-		public IActionResult DisableGamePreference(user user, game gamePreference)
+		public IActionResult DisableGamePreference(User user, Game gamePreference)
 		{
 			var User = this
 				.db
@@ -104,7 +104,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("GamePreferences/{gamePreference}/enable", Name = "EnableGamePreferenceRouteName")]
-		public IActionResult EnableGamePreference(user user, game gamePreference) 
+		public IActionResult EnableGamePreference(User user, Game gamePreference) 
 		{
 			var User = this
 				.db
@@ -121,24 +121,14 @@ namespace HaloRuns.Controllers
 			return Json(0);
 		}
 
-
-		[Route("NewRun/Submit/{mapId}", Name = "RunSubmit")]
+		[Route("NewRun/Submit", Name = "RunSubmit")]
 		[HttpPost]
-		public JsonResult RunPost(user User, [FromForm] List<String> values) {
-			return Json(values);
+		public JsonResult RunPost(User User, [FromForm] RunIds RunIds) {
+			return Json(RunIds);
 		}
-
-		/*
-		 * [Route("NewRun/Submit")]
-		public IActionResult RunPost(user user, run newrun) {
-			user.Runs.Add(newrun);
-			this.db.SaveChanges();
-			return Json(0);
-		}
-		*/
 
 		[Route("NewRun")]
-		public IActionResult RunEntry(user user) {
+		public IActionResult RunEntry(User user) {
 			var User = this
 					.db
 					.Users
@@ -160,7 +150,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("NewRun/{game}/editions", Name = "RunEntryFetchEditionRouteName")]
-		public IActionResult RunEntryFetchEdition(game game) {
+		public IActionResult RunEntryFetchEdition(Game game) {
 			var Editions = this
 				.db
 				.Editions
@@ -171,7 +161,7 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("NewRun/{game}/maps", Name = "RunEntryFetchMapRouteName")]
-		public IActionResult RunEntryFetchMap(game game)
+		public IActionResult RunEntryFetchMap(Game game)
 		{
 			var Maps = this
 				.db
@@ -183,9 +173,9 @@ namespace HaloRuns.Controllers
 		}
 
 		[Route("NewRun/GetRunInstance")]
-		public run GetRunInstance(user User, difficulty Difficulty, map Map, int Time, edition Edition) {
+		public Run GetRunInstance(User User, Difficulty Difficulty, Map Map, int Time, Edition Edition) {
 			int Date = 0;
-			var a = new run();
+			var a = new Run();
 			a.User = User;
             a.Date = Date;
 			a.Difficulty = Difficulty;

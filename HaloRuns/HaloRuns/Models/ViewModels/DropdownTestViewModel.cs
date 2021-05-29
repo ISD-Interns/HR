@@ -7,7 +7,7 @@ namespace HaloRuns.Models.ViewModels
 {
 	public class DropdownTestViewModel
 	{
-		public IEnumerable<map> maps { get; set; }
-		public map OneMap { get; set; }
+		public IEnumerable<Map> maps { get; set; }
+		public Map OneMap { get; set; }
 	}
 }

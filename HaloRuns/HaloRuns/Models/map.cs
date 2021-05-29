@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace HaloRuns.Models
 {
-    public class map// : Object
+    public class Map
     {
         [DisplayName("name")]
         public string name { get; set; }
+        [Helpers.RouteModelBindKey]
         public int id { get; set; }
         public int GameId { get; set; }
-        public game Game { get; set; }
-        public IEnumerable<run> Runs { get; set; }
+        public Game Game { get; set; }
+        public IEnumerable<Run> Runs { get; set; }
 
         /*
 		public override string ToString()
