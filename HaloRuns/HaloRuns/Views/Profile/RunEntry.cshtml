@@ -115,7 +115,6 @@
                 });
                 
                 //const AbrevGameMap = $(this).children('option:selected').first().data("map-list-endpoint");
-                const AbrevGameMap = 
                 const AbrevGameMap = kMapListEndpointFormatString.replace('REPLACE_STR', $(this).children('option:selected').first().val());
                 $.get(AbrevGameMap, null, function (response) {
                     console.log("hello");
