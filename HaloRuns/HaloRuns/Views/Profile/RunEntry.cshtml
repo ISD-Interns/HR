@@ -30,7 +30,6 @@
 
             <label for="difficulties">Choose a difficulty:</label>
 
-            <p>Difficulty:</p>
             @Html.DropDownListFor(m => m.run.DifficultyId, new SelectList(Model.difficulties, nameof(HaloRuns.Models.Difficulty.Id), nameof(HaloRuns.Models.Difficulty.Name)), new { id = "difficulty" })
 
             <input type="submit" value="submit" />
