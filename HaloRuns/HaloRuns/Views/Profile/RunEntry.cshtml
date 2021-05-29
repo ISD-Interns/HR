@@ -6,66 +6,40 @@
 <strong>Create a Request for @Model.user.Username</strong>
 <div class="RunFormcontainer" style="padding-top:50px">
 
-    @using (Html.BeginForm("Create", "Runs", FormMethod.Post, new { @id = "CreateRequestPartialForm", @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("RunPost", "Profile", FormMethod.Post, new { @id = "CreateRequestPartialForm", @class = "form-horizontal", role = "form" }))
     {
         <h2>Create a Request</h2>
         <p>The select element is used to create a drop-down list.</p>
 
-        <form id="Table" asp-controller="Profile" asp-action="RunPost">
             <label for="games">Choose a game:</label>
-            <select id="games" class="games">
-
-                <option value="-1">no selection</option>
-                @foreach (var game in Model.games)
-                {
-                    <option value="@game.id"
-                            data-edition-list-endpoint="@Url.RouteUrl("RunEntryFetchEditionRouteName", new { user = Model.user.Username, game = game.RouteName })"
-                            data-map-list-endpoint="@Url.RouteUrl("RunEntryFetchMapRouteName", new { user = Model.user.Username, game = game.RouteName })">
-                        @game.name
-                    </option>
-                }
-            </select>
-            <label for="edition">Choose an editon:</label>
-            <select id="editions" class="editions">
-                <option value="-1">no selection</option>
-            </select>
-
-            <label for="map">Choose a map:</label>
-            <select id="maps" class="maps">
-                <option value="-1"> no selction</option>
-            </select>
-
-            <label for="difficulties">Choose a difficulty:</label>
-            <select id="difficulties" class="difficulties">
-                <option value="-1"> no selction</option>
-                @foreach (var diff in Model.difficulties)
-                {
-                    <option value="@diff.Id">
-                        @diff.Name
-                    </option>
-                }
-            </select>
-            <button type="submit" form="nameform" value="Submit" id="Submit"
-                    data-submit-endpoint="@Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
-                Submit
-            </button>
-        </form>
-        <form id="Table" asp-controller="Profile" asp-action="RunPost">
-            <p>Game:</p>
             @* @Html.DropDownListFor(m => m.games, new SelectList(new List<SelectListItem> { new SelectListItem{ Text = "no selection", Value = "-1" } }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
 
             @* @Html.DropDownListFor(m => m.games, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
             @* @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => new SelectListItem { Text = m.name, Value = m.id.ToString() }).ToList()), new { id = "1" }) *@
             @Html.DropDownListFor(m => m.games, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), nameof(HaloRuns.Models.Game.name)), new { id = "game" })
+
+
+
+            <label for="edition">Choose an editon:</label>
+            <!-- <p>Edition:</p> -->
+            @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "edition" })
+
+            <label for="map">Choose a map:</label>
+            <!-- <p>Map:</p> -->
+            @Html.DropDownListFor(m => m.run.MapId, new SelectList(new string[] { "no selection" }), new { id = "map" })
+
+            <label for="difficulties">Choose a difficulty:</label>
+
             <p>Difficulty:</p>
             @Html.DropDownListFor(m => m.run.DifficultyId, new SelectList(Model.difficulties, nameof(HaloRuns.Models.Difficulty.Id), nameof(HaloRuns.Models.Difficulty.Name)), new { id = "difficulty" })
 
-            <p>Edition:</p>
-            @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "edition" })
-            <p>Map:</p>
-            @Html.DropDownListFor(m => m.run.MapId, new SelectList(new string[] { "no selection" }), new { id = "map" })
             <input type="submit" value="submit" />
-        </form>
+            <!--
+            <button type="submit" form="nameform" value="Submit" id="Submit"
+                    data-submit-endpoint="@Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
+                Submit
+            </button>
+			-->
     }
 </div>
 
@@ -131,6 +105,7 @@
 
             });
 
+            /*
             $('#Submit').click(function () {
                 console.log("clicked");
                 var mapId = $("#map :selected").attr('value');
@@ -144,6 +119,7 @@
                     console.log(response);
                 });
             });
+            */
         });
     </script>
 }
