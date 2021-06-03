@@ -21,6 +21,7 @@ namespace HaloRuns.Models.ViewModels
         public List<Game> games { get; set; }
 
         public Run run { get; set;}
+
         //public string Username { get; set; }
         //public int Date { get; set; }
         //[DisplayName("time")]

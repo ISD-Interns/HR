@@ -1,0 +1,26 @@
+﻿@model HaloRuns.Models.Question
+
+@section Title { Question Form }
+
+<strong>Post a question you may have for the site</strong>
+
+
+<div class="QuestionForm" style="padding-top:50px">
+
+    @using (Html.BeginRouteForm("RunSubmit", FormMethod.Post))
+
+    {
+        <h2>Tell us a question you have</h2>
+
+        <input type="text" id="question" placeholder="Enter Question Here." name="question" />
+        <input type="submit" value="submit" />
+        <!--
+        <button type="submit" form="nameform" value="Submit" id="Submit"
+                data-submit-endpoint="Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
+            Submit
+        </button>
+        -->
+    }
+</div>
+
+

@@ -39,7 +39,9 @@ namespace HaloRuns.ModelBinders
 				.GetProperties()
 				.Where(prop => prop.PropertyType == typeof(DbSet<T>))
 				.ToList();
-
+			if (dbTableProp.Count() == 0) {
+				return Task.CompletedTask;
+			}
 			var dbTable = (DbSet<T>)dbTableProp.First().GetValue(dbContext);
 			var targetProp = AttributeLookupHelper.CheckRequiredAttribute<RouteModelBindKeyAttribute>(typeof(T));
 

@@ -121,13 +121,15 @@ namespace HaloRuns.Controllers
 			return Json(0);
 		}
 
-		[Route("NewRun/Submit", Name = "RunSubmit")]
+		[Route("NewRun", Name = "RunSubmit")]
 		[HttpPost]
-		public JsonResult RunPost(User User, [FromForm] RunForm rf) {
-			return Json(rf);
+		public IActionResult RunPost(User User, [FromForm] RunForm rf, string firstName) {
+			
+			return Content(firstName);
 		}
 
 		[Route("NewRun")]
+		[HttpGet]
 		public IActionResult RunEntry(User user) {
 			var User = this
 					.db

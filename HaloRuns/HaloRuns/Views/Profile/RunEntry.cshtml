@@ -6,39 +6,41 @@
 <strong>Create a Request for @Model.user.Username</strong>
 <div class="RunFormcontainer" style="padding-top:50px">
 
-	@* @using (Html.BeginForm("RunPost", "Profile", FormMethod.Post, new { @id = "CreateRequestPartialForm", @class = "form-horizontal", role = "form" })) *@
-	@using (Html.BeginRouteForm("RunSubmit", new { user = Model.user.Username }, FormMethod.Post))
+    @* @using (Html.BeginForm("RunPost", "Profile", FormMethod.Post, new { @id = "CreateRequestPartialForm", @class = "form-horizontal", role = "form" })) *@
+    @using (Html.BeginRouteForm("RunSubmit", new { user = Model.user.Username }, FormMethod.Post))
 
-	{
-		<h2>Create a Request</h2>
-		<p>The select element is used to create a drop-down list.</p>
+    {
+        <h2>Create a Request</h2>
+        <p>The select element is used to create a drop-down list.</p>
 
-		<label for="games">Choose a game:</label>
-		@* @Html.DropDownListFor(m => m.games, new SelectList(new List<SelectListItem> { new SelectListItem{ Text = "no selection", Value = "-1" } }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
+        <label asp-for="games">Choose a game:</label>
+        @* @Html.DropDownListFor(m => m.games, new SelectList(new List<SelectListItem> { new SelectListItem{ Text = "no selection", Value = "-1" } }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
 
-		@* @Html.DropDownListFor(m => m.games, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
-		@* @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => new SelectListItem { Text = m.name, Value = m.id.ToString() }).ToList()), new { id = "1" }) *@
-		@Html.DropDownListFor(m => m.run.GameId, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), nameof(HaloRuns.Models.Game.name)), new { id = "game" })
-		<label for="edition">Choose an editon:</label>
-		<!-- <p>Edition:</p> -->
-		@Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "edition" })
+        @* @Html.DropDownListFor(m => m.games, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
+        @* @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => new SelectListItem { Text = m.name, Value = m.id.ToString() }).ToList()), new { id = "1" }) *@
+        @Html.DropDownListFor(m => m.run.GameId, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), nameof(HaloRuns.Models.Game.name)), new { id = "game" })
+        <label asp-for="run.Edition">Choose an editon:</label>
+        <!-- <p>Edition:</p> -->
+        @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "edition" })
 
-		<label for="map">Choose a map:</label>
-		<!-- <p>Map:</p> -->
-		@Html.DropDownListFor(m => m.run.MapId, new SelectList(new string[] { "no selection" }), new { id = "map" })
+        <label asp-for="run.Map">Choose a map:</label>
+        <!-- <p>Map:</p> -->
+        @Html.DropDownListFor(m => m.run.MapId, new SelectList(new string[] { "no selection" }), new { id = "map" })
 
-		<label for="difficulties">Choose a difficulty:</label>
+        <label asp-for="difficulties">Choose a difficulty:</label>
 
-		@Html.DropDownListFor(m => m.run.DifficultyId, new SelectList(Model.difficulties, nameof(HaloRuns.Models.Difficulty.Id), nameof(HaloRuns.Models.Difficulty.Name)), new { id = "difficulty" })
+        @Html.DropDownListFor(m => m.run.DifficultyId, new SelectList(Model.difficulties, nameof(HaloRuns.Models.Difficulty.Id), nameof(HaloRuns.Models.Difficulty.Name)), new { id = "difficulty" })
 
-		<input type="submit" value="submit" />
-		<!--
-		<button type="submit" form="nameform" value="Submit" id="Submit"
-				data-submit-endpoint="@Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
-			Submit
-		</button>
-		-->
-	}
+        <label for="firstName">Your first name</label>
+        <input type="text" id="firstName" placeholder="Your name goes here" name="firstName"/>
+        <input type="submit" value="submit" />
+        <!--
+        <button type="submit" form="nameform" value="Submit" id="Submit"
+                data-submit-endpoint="Url.RouteUrl("RunSubmit", new {user = Model.user.Username})">
+            Submit
+        </button>
+        -->
+    }
 </div>
 
 
