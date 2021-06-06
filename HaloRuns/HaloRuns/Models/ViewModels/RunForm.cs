@@ -8,7 +8,12 @@ namespace HaloRuns.Models.ViewModels
 {
     public class RunForm
     {
-        public RunForm(User someone, List<Game> games, List<Difficulty> difficulties) {
+        public RunForm()
+        {
+        }
+
+        public RunForm(User someone, List<Game> games, List<Difficulty> difficulties)
+        {
             this.user = someone;
             this.games = games;
             this.difficulties = difficulties;
@@ -19,6 +24,7 @@ namespace HaloRuns.Models.ViewModels
         public User user { get; set;}
         public List<Difficulty> difficulties { get; set; }
         public List<Game> games { get; set; }
+        public int GameId { get; set; }
 
         public Run run { get; set;}
 

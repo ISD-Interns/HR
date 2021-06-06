@@ -1,5 +1,6 @@
 ﻿using HaloRuns.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,18 @@ namespace HaloRuns.ModelBinders
             {
                 throw new ArgumentNullException(nameof(context));
             }
+
+            if (context.BindingInfo.BindingSource?.IsFromRequest == true)
+			{
+                return null;
+			}
+
+            //if (context.Metadata.ModelType != typeof(DbSet<>))
+            if (context.Metadata.ModelType.Namespace != "HaloRuns.Models")
+            {
+                return null;
+			}
+
             //return new BaseModelBinder<User>();
             var generic = typeof(BaseModelBinder<>);
 

@@ -18,7 +18,7 @@
 
         @* @Html.DropDownListFor(m => m.games, new SelectList(new List<string> { "no selection" }).Concat(new SelectList(Model.games.Select(m => m.name))), new { id = "1" }) *@
         @* @Html.DropDownListFor(m => m.games, new SelectList(Model.games.Select(m => new SelectListItem { Text = m.name, Value = m.id.ToString() }).ToList()), new { id = "1" }) *@
-        @Html.DropDownListFor(m => m.run.GameId, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), nameof(HaloRuns.Models.Game.name)), new { id = "game" })
+        @Html.DropDownListFor(m => m.GameId, new SelectList(Model.games, nameof(HaloRuns.Models.Game.id), nameof(HaloRuns.Models.Game.name)), new { id = "game" })
         <label asp-for="run.Edition">Choose an editon:</label>
         <!-- <p>Edition:</p> -->
         @Html.DropDownListFor(m => m.run.EditionId, new SelectList(new string[] { "no selection" }), new { id = "edition" })
